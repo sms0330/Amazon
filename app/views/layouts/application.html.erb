@@ -6,9 +6,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_link_tag 'bootstrap.min.css', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
-    <link type="text/css" rel="stylesheet" href="/bootstrap.min.css">
   </head>
 
   <body>
@@ -16,6 +15,7 @@
         <a href="/">Home</a> |
         <a href="/about">About</a> |
         <a href="/contact">Contact</a> |
+        <a href="/new">Bill Splitter</a> |
         <hr>
         <div class="col-md-6">
     <%= yield %>

@@ -1,0 +1,23 @@
+<h1>Bill Splitter</h1>
+<%= form_tag bill_path do %>
+  <div class="">
+    <%= label_tag :amount %> $
+    <%= text_field_tag :amount, @amount %>
+  </div>
+  <div class="">
+    <%= label_tag :tax %> %
+    <%= text_field_tag :tax, @tax %>
+  </div>
+  <div class="">
+    <%= label_tag :tip %> %
+    <%= text_field_tag :tip, @tip %>
+  </div>
+  <div class="">
+    <%= label_tag :number_of_people %>
+    <%= text_field_tag :number_of_people, @number_of_people %>
+  </div>
+  <%= submit_tag 'Split Bill' %>
+<% end %>
+<% if @total %>
+  The total per person is <%= @total %>
+<% end %>

@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   get("/about", {to:"about#index"})
   get("/contact", {to:"contact#index"})
   post("/contact_submit", {to:"contact#create", as: "contact_submit" })
+  get("/new",{to:"bills#new"})
+  post("/bill", {to: 'bills#calculate', as: :bill})
 end
