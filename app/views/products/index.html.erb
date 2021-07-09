@@ -1,0 +1,16 @@
+<h1>All products</h1>
+
+<% @products.each do |product|%>
+<div>
+    <h2>
+    <%= link_to(product.title,product_path(product.id)) %>
+    </h2>
+    <p>
+        <%= product.description%>
+    </p>
+    <small>
+    $<%= format("%.2f",product.price) %>
+    </small>
+</div>
+<hr />
+<% end %>

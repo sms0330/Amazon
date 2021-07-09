@@ -14,8 +14,10 @@
       <div class="container">
         <a href="/">Home</a> |
         <a href="/about">About</a> |
-        <a href="/contact">Contact</a> |
+        <a href="/contact">Contact Us</a> |
         <a href="/new">Bill Splitter</a> |
+        <%= link_to 'New Product', new_product_path %> |
+        <%= link_to 'Products Index', products_path%> |
         <hr>
         <div class="col-md-6">
     <%= yield %>
