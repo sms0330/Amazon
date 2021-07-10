@@ -1,23 +1,26 @@
 class ProductsController < ApplicationController
     before_action :find_product, only: [:show, :edit, :update, :destroy]
+    
     def index
         @products = Product.all.order(created_at: :desc) 
     end
-
+    
     def new
         @product = Product.new
     end
-
+    
     def create
         @product = Product.new product_params
         if @product.save
-            redirect_to product_path(@product), notice: "Product created successfully"
+            redirect_to product_path(@product.id)
         else
             render :new
         end
     end
     
     def show
+        @review = Review.new
+        @reviews = @product.reviews.order(created_at: :desc) 
     end
     
     def destroy
@@ -26,6 +29,7 @@ class ProductsController < ApplicationController
     end
 
     def edit
+        
     end
 
     def update

@@ -7,3 +7,42 @@
 <%= link_to 'Delete', product_path(@product), method: :delete, data: { confirm: "Are you sure?" } %>
 <br>
 <%= flash[:notice] || flash[:alert] %>
+
+<h3>
+    Put a review here
+</h3>
+<% if @review.errors.any? %>
+  <ul>
+    <% @review.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_with model:[@product,@review], local: true do |form|%>
+<div>
+    <%= form.label :body%>
+    <%= form.text_area :body, cols: 50, rows:5, placeholder: "How did you like this product?" %>
+</div>
+<div>
+    <%= form.label :rating%>
+    <%= form.text_field :rating, placeholder: "i.e. 1-5"%>
+</div>
+<div>
+    <%= form.submit%>
+</div>
+
+<% end %>
+
+
+<ul>
+<% @reviews.each do |review|%>
+    <li>
+    <small>rating:  <%= review.rating%></small>
+    <br />
+    <%= review.body%>
+    <small>
+    <%= link_to("Delete", product_review_path(@product, review) ,method: :delete, data:{confirm:"Are you sure?"}) %>
+    </small>
+    </li>
+<% end %>
+</ul>
