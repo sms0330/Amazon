@@ -18,6 +18,13 @@
         <a href="/new">Bill Splitter</a> |
         <%= link_to 'New Product', new_product_path %> |
         <%= link_to 'Products Index', products_path%> |
+        <%if user_signed_in? %>
+          Hello <%= current_user.full_name %>! |
+          <%= link_to 'Logout', sessions_path, method: :delete, data:{confirm: 'Are you sure you want to logout?'}%>
+        <% else %>
+          <%= link_to 'Login', new_sessions_path %> |
+          <%= link_to 'Sign Up', new_user_path %>
+        <% end %>
         <hr>
         <div class="col-md-6">
     <%= yield %>

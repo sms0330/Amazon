@@ -8,6 +8,8 @@ class Product < ApplicationRecord
 
     has_many :reviews, dependent: :destroy
 
+    belongs_to :user, optional: true
+
     def set_defaults
         self.price ||= 1
     end
