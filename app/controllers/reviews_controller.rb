@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
         @review.user = current_user
         @review.product = @product
         if @review.save
-            redirect_to product_path(@product)
+            redirect_to product_path(@product), notice: 'Review Created'
         else
         @reviews = @product.reviews
         render 'products/show'
@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
         @review = Review.find params[:id]
         if can?(:crud, @review)
             @review.destroy
-            redirect_to product_path(@product)
+            redirect_to product_path(@product), notice: 'Review Deleted'
         else
             redirect_to root_path, alert: "Not authorized!"
         end

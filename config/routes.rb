@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
  end
  resources :users, only:[:new, :create]
- resource :sessions, only:[:new, :create, :destroy]
+ resource :session, only:[:new, :create, :destroy]
+
+ get("/dashboard",{to:"users#dashboard"})
 
 end

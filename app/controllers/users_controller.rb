@@ -12,6 +12,16 @@ class UsersController < ApplicationController
         render :new
       end
     end
+
+    def dashboard
+      if current_user.is_admin?
+        @user_number = User.all.count
+        @product_number = Product.all.count
+        @review_number = Review.all.count
+      else
+        redirect_to root_path
+      end
+    end   
   
     private
   
