@@ -29,4 +29,6 @@ Rails.application.routes.draw do
 
  get("/dashboard",{to:"users#dashboard"})
 
+ resources :news_articles
+
 end
