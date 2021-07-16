@@ -1,6 +1,5 @@
 class NewsArticlesController < ApplicationController
     before_action :find_news_article, only: [:show, :destroy, :edit, :update]
-    before_action :news_article_params, only: [:create, :update]
 
     def new
         @news_article = NewsArticle.new
