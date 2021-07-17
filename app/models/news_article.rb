@@ -8,6 +8,8 @@ class NewsArticle < ApplicationRecord
         self.published_at
     end
 
+    #Labs for testing authentication
+    belongs_to :user
     private
 
     def published_at_after_created_at

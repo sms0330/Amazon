@@ -1,52 +1,59 @@
 class NewsArticlesController < ApplicationController
-    before_action :find_news_article, only: [:show, :destroy, :edit, :update]
-
+    before_action :find_news_article, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+    before_action :authorize_user!, only: [:edit, :update, :destroy]
     def new
         @news_article = NewsArticle.new
     end
-    
     def create
         @news_article = NewsArticle.new news_article_params
+        @news_article.user = current_user
         if @news_article.save
-            redirect_to news_article_path(@news_article)
+          redirect_to news_article_path(@news_article)
         else
-            render :new
+          render :new
         end
     end
 
-    def destroy
-        find_news_article
-        find_news_article.destroy
-        flash[:danger] = "deleted news article"
-        redirect_to news_articles_path
-    end
-
     def show
-        @find_news_article
+      
+    end
+    
+    def destroy
+      @news_article.destroy
+      flash[:danger] = "News Article destroyed!"
+      redirect_to news_articles_path
     end
 
     def index
-        @news_articles = NewsArticle.all.order(created_at: :desc)
+      @news_articles = NewsArticle.order(created_at: :desc)
     end
 
     def edit
-
+      
     end
-
     def update
-        @find_news_article
-        @news_article.update news_article_params
-        redirect_to @news_article
+      if @news_article.update news_article_params
+        redirect_to news_article_path(@news_article.id)
+      else
+          render :edit
+      end
     end
+    
+    
 
     private
 
     def news_article_params
-        params.require(:news_article).permit(:title, :description, :view_count, :published_at)
+      params.require(:news_article).permit(:title, :description, :published_at, :view_count)
     end
 
     def find_news_article
-        @news_article = NewsArticle.find params[:id]
+      @news_article = NewsArticle.find(params[:id])
     end
 
+    def authorize_user!
+      flash[:danger] = "Permission denied"
+      redirect_to root_path unless can?(:crud, @news_article)
+    end
 end
