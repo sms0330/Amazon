@@ -20,10 +20,12 @@ Rails.application.routes.draw do
 
 
  resources :products do
-
   resources :reviews, only: [:create, :destroy]
-
  end
+
+ post '/products/:product_id/reviews/:review_id/likes', {to: "likes#create", as: :product_review_likes}
+ delete '/products/:product_id/reviews/:review_id/likes/:id', {to: "likes#destroy", as: :product_review_like}
+ 
  resources :users, only:[:new, :create]
  resource :session, only:[:new, :create, :destroy]
 

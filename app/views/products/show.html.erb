@@ -49,6 +49,14 @@
         Reviewd  by:
         <%= review.user&.full_name || "Deleted" %>
     </div>
+    <small><%= review.likes.count %> people like this</small>
+    <% if can? :like, review %>
+        <%if review.likes.find_by(user: current_user).present? %>
+          <%= link_to "👎 Un-like", product_review_like_path(review.product_id, review.id, review.likes.find_by(user_id: current_user.id)), method: :delete %>
+        <% else %>
+          <%= link_to "👍 Like", product_review_likes_path(review.product_id, review.id), method: :post %>
+        <% end %>
+    <% end %>
     <small>
     <% if can? :crud, review %>
       <%= link_to("Delete", product_review_path(@product, review) ,method: :delete, data:{confirm:"Are you sure?"}) %>

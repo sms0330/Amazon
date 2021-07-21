@@ -3,6 +3,9 @@ class User < ApplicationRecord
     has_many :answers, dependent: :nullify
     has_many :news_articles, dependent: :nullify
 
+    has_many :likes, dependent: :nullify
+    has_many :liked_reviews, through: :likes, source: :review
+
     has_secure_password
 
     validates :email, presence: true, uniqueness: { case_sensitive: false }
