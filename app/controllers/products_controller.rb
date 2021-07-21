@@ -23,7 +23,8 @@ class ProductsController < ApplicationController
     
     def show
         @review = Review.new
-        @reviews = @product.reviews.order(created_at: :desc) 
+        @reviews = @product.reviews.order(created_at: :desc)
+        @favourite = Favourite.find_by(product_id: @product, user_id: current_user) 
     end
     
     def destroy

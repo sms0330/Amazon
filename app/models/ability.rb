@@ -37,12 +37,20 @@ class Ability
       news_article.user == user
     end
 
-    can(:like, Review) do |review|
-      user.persisted? && review.user != user
+    # lab for many to many
+    can :like, Review do |review|
+      user.persisted? && user != review.user
+    end
+    can :destroy, Like do |like|
+      like.user == user
     end
 
-    can(:destroy, Like) do |like|
-      like.user == user
+    can :favourite, Product do |product|
+      user.persisted? && user != product.user
+    end
+
+    can :destroy, Favourite do |favourite|
+      favourite.user == user
     end
 
   end

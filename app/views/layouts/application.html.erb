@@ -11,6 +11,11 @@
   </head>
 
   <body>
+    <% flash.each do |type, message|%>
+    <div class="flush flush-<%= type%>">
+      <%= message%>
+    </div>
+    <% end%>
       <div class="container">
         <a href="/">Home</a> |
         <a href="/about">About</a> |

@@ -7,12 +7,23 @@
 <% if can? :crud, @product %>
   <%= link_to 'Edit', edit_product_path(@product) %> |
 <% end %>
+<% if @favourite%>
+  <%= link_to @favourite.is_favourite ? "Cancel Favourite" : "Cancel Unavourite", favourite_path(@favourite), class:"btn btn-light ", method: :delete%>
+<% else%>
+  <%= form_with(url: product_favourites_path(@product), local: true) do |f| %>
+  <input type="hidden" name="is_favourite" value="true">
+  <%= f.submit "Favourite", class:"btn btn-info" %>
+  <% end %>
+  <%= form_with(url: product_favourites_path(@product), local: true) do |f| %>
+  <input type="hidden" name="is_favourite" value="false">
+  <%= f.submit "Unfavourite", class:"btn btn-dark" %>
+  <% end %>
+<% end %>
 <% if can? :crud, @product %>
   <%= link_to 'Delete', product_path(@product), method: :delete, data: { confirm: "Are you sure?" } %>
 <% end %>
 <br>
 <%= flash[:notice] || flash[:alert] %>
-
 <h3>
     Put a review here
 </h3>
@@ -49,19 +60,29 @@
         Reviewd  by:
         <%= review.user&.full_name || "Deleted" %>
     </div>
-    <small><%= review.likes.count %> people like this</small>
-    <% if can? :like, review %>
-        <%if review.likes.find_by(user: current_user).present? %>
-          <%= link_to "👎 Un-like", product_review_like_path(review.product_id, review.id, review.likes.find_by(user_id: current_user.id)), method: :delete %>
-        <% else %>
-          <%= link_to "👍 Like", product_review_likes_path(review.product_id, review.id), method: :post %>
-        <% end %>
-    <% end %>
-    <small>
     <% if can? :crud, review %>
       <%= link_to("Delete", product_review_path(@product, review) ,method: :delete, data:{confirm:"Are you sure?"}) %>
     <% end %>
     </small>
+
+      <% if review.likes.find_by(user: current_user).present?  && can?(:destroy, review.likes.find_by(user: current_user)) %>
+      <%= link_to(
+        "👎 Unlike",
+        like_path(review.likes.find_by(user: current_user)), 
+        class:"btn btn-danger ",
+        method: :delete
+        ) %>
+      <% else can?(:like, review) %>
+      <%= link_to(
+              "👍 Like",
+              product_review_likes_path(@product,review),
+              class:"btn btn-success ",
+              method: :post
+        ) %>
+      <% end %>
+      <small>
+        (<%= pluralize(review.likes.count, "like") %>)
+      </small>
     </li>
 <% end %>
 </ul>

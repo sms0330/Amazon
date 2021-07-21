@@ -1,29 +1,30 @@
 class LikesController < ApplicationController
     before_action :authenticate_user!
-
     def create
-        review = Review.find params[:review_id]
-        product = Product.find params[:product_id]
-        like = Like.new(review_id: review.id, user_id: current_user.id)
-
-        if !can?(:like, review)
-            return redirect_to product_path(product), alert: "You can't like your own comment!"
-        end
-
-        if like.save
-            redirect_to product_path(product), notice: 'liked!'
-        else
-            redirect_to product_path(product)
-        end
+      review = Review.find(params[:review_id])
+      like = Like.new(user: current_user, review: review)
+      @product = Product.find(params[:product_id])
+      if !can?(:like, review)
+        redirect_to review, alert: "can't like your own review"
+      elsif like.save
+        flash[:success] = "Review Liked"
+        redirect_to product_path(@product)
+      else
+        flash[:danger] = like.errors.full_messages.join(", ")
+        redirect_to product_path(@product)
+      end
     end
 
     def destroy
-        product = Product.find params[:product_id]
-        review = Review.find params[:review_id]
-        liker = Like.find params[:id]
-        liker.destroy
-        redirect_to product_path(product)
+      like = current_user.likes.find(params[:id])
+      @product = like.review.product
+      if can? :destroy, like
+        like.destroy
+        flash[:success] = "Review unliked"
+        redirect_to product_path(@product)
+      else
+        flash[:danger] = "Can't unlike it"
+        redirect_to product_path(@product)
+      end
     end
-
-
 end
