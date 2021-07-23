@@ -50,6 +50,7 @@ group :development do
   gem 'cowsay', '~> 0.3.0'
   gem 'pry'
   gem 'pry-rails'
+  gem 'letter_opener'
 
 end
 

@@ -1,0 +1,10 @@
+<p>Hello <%= @owner.full_name %>,</p>
+<p> You have a new product to your Amazon. </p>
+<p> Product title: <%= @product.title %></p>
+<p> Product body: <%= @product.description %></p>
+<p> Product price: <%= @product.price %></p>
+<p>To view your product, please follow this link:
+<%= link_to 'Your Product', product_url(@product) %>
+</p>
+<p>Regards,</p>
+<p>Amazon Products Team</p> 

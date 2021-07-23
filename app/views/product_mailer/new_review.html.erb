@@ -1,0 +1,11 @@
+<p>Hello <%= @owner.full_name %>,</p>
+<p> You have a new review to your product. </p>
+<p> Product title: <%= @product.title %></p>
+<p> Product price: <%= @product.price %></p>
+<p> Review body: <%= @review.body %></p>
+<p> Review rating: <%= @review.rating %></p>
+<p>To view your product's review, please follow this link:
+<%= link_to 'Your Product', product_url(@product) %>
+</p>
+<p>Regards,</p>
+<p>Amazon Products Team</p> 

@@ -6,6 +6,7 @@ class ReviewsController < ApplicationController
         @review.user = current_user
         @review.product = @product
         if @review.save
+            ProductMailer.new_review(@review).deliver_now
             redirect_to product_path(@product), notice: 'Review Created'
         else
         @reviews = @product.reviews
