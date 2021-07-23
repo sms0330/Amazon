@@ -1,6 +1,9 @@
 <h1>All products</h1>
 
 <% @products.each do |product|%>
+    <% if params[:tag]%>
+    <p class="badge badge-pill badge-dark"><%= params[:tag]%> tag</p>
+    <% end %>
 <div>
     <h2>
     <%= link_to(product.title,product_path(product.id)) %>

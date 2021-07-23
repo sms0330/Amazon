@@ -10,6 +10,10 @@ class User < ApplicationRecord
     has_many :favourites
     has_many :favourited_products, through: :favourites, source: :product
 
+    # lab for more many to many
+    has_many :votes
+    has_many :vote_reviews, through: :votes, source: :review
+
     has_secure_password
 
     validates :email, presence: true, uniqueness: { case_sensitive: false }

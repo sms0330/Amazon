@@ -5,6 +5,11 @@ class Product < ApplicationRecord
     # lab for many to many
     has_many :favourites, dependent: :destroy
     has_many :favouriters, through: :favourites, source: :user
+
+    # lab for more many to many 
+    has_many :taggings, dependent: :destroy
+    has_many :tags, through: :taggings
+    
     
     validates :title, presence: true, uniqueness: {case_sensitive: false}
     validates :price, numericality: {greater_than: 0}

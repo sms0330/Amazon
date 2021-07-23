@@ -53,5 +53,13 @@ class Ability
       favourite.user == user
     end
 
+    #lab for more many to many
+    can :vote, Review do |review|
+      user.persisted? && user != review.user
+    end
+
+    can :destroy, Vote do |vote|
+      vote.user == user
+    end
   end
 end

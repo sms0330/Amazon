@@ -2,6 +2,11 @@
 <h2><%= @product.title %></h2>
 <p><%= @product.description %></p>
 <p><%= @product.price %></p>
+<p><strong>Tags:</strong>
+<%@product.tags.each do |tag|%>
+    <p class="badge badge-pill badge-dark"><%= link_to tag.name, products_path(tag: tag.name) %></p>
+<% end %>
+</p>
 <p>Created_by: <%= @product.user&.full_name || "Deleted" %></p>
 <p>Created at:<%= @product.created_at %></p>
 <% if can? :crud, @product %>
@@ -84,5 +89,36 @@
         (<%= pluralize(review.likes.count, "like") %>)
       </small>
     </li>
+      <% vote = review.votes.find_by(user: current_user) %>
+      <% if vote%>
+        <%= link_to vote.is_vote ? "Cancel Vote Up" : "Cancel Vote Down", vote_path(vote), class:"btn btn-light ", method: :delete%>
+      <% elsif can?(:vote, review)%>
+        <%= form_with(url: product_review_votes_path(@product,review), local: true) do |f| %>
+        <input type="hidden" name="is_vote" value="true">
+        <%= f.submit "Vote Up", class:"btn btn-info" %>
+        <% end %>
+        <%= form_with(url: product_review_votes_path(@product,review), local: true) do |f| %>
+        <input type="hidden" name="is_vote" value="false">
+        <%= f.submit "Vote Down", class:"btn btn-dark" %>
+        <% end %>
+      <% end %>
+      <small>
+        | (<%= pluralize(review.votes.where(is_vote: true).count, "vote up") %>) |
+      </small>
+      <small>
+        (<%= pluralize(review.votes.where(is_vote: false).count, "vote down") %>) |
+      </small>
+  <% if @vote%>
+    <%= link_to @favourite.is_favourite ? "Cancel Favourite" : "Cancel Unavourite", favourite_path(@favourite), class:"btn btn-light ", method: :delete%>
+  <% else%>
+    <%= form_with(url: product_favourites_path(@product), local: true) do |f| %>
+    <input type="hidden" name="is_favourite" value="true">
+    <%= f.submit "Favourite", class:"btn btn-info" %>
+    <% end %>
+    <%= form_with(url: product_favourites_path(@product), local: true) do |f| %>
+    <input type="hidden" name="is_favourite" value="false">
+    <%= f.submit "Unfavourite", class:"btn btn-dark" %>
+    <% end %>
+  <% end %>
 <% end %>
 </ul>
