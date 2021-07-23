@@ -37,4 +37,11 @@ Rails.application.routes.draw do
 
  resources :news_articles
 
+ match(
+  "/delayed_job",
+  to: DelayedJobWeb,
+  anchor: false,
+  via: [:get, :post]
+)
+
 end
