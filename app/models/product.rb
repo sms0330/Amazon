@@ -21,6 +21,21 @@ class Product < ApplicationRecord
 
     # A callback method to set the default price to 1
     # A callback method to capitalize the product title before saving
+
+        #------------ADD CUSTOM TAG METHODS TO GET OR SET TAGS WITH SELECTIZE----------------------------->
+
+    #Getter
+    def tag_names
+        self.tags.map(&:name).join(", ")
+    end
+    
+    #Setter
+    def tag_names=(rhs)
+        self.tags = rhs.strip.split(/\s*,\s*/).map do |tag_name|
+            Tag.find_or_initialize_by(name: tag_name)
+        end
+    end
+
     private
     def set_defaults
         self.price ||= 1

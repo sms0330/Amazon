@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+@import 'bootstrap';
+@import 'selectize';
+@import 'selectize.bootstrap3';
+
+.review-form {
+    width: 100px;
+    height: 200px;
+    border-radius: 3em;
+} 

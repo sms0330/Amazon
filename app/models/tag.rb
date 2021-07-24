@@ -1,4 +1,6 @@
 class Tag < ApplicationRecord
+    before_save :downcase_name
+    
     has_many :taggings, dependent: :destroy
     has_many :products, through: :taggings
 

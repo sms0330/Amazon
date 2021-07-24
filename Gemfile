@@ -22,8 +22,11 @@ gem 'bcrypt', '~> 3.1.7'
 # Used for authorization
 gem 'cancancan', '~> 3.3'
 
+gem 'selectize-rails'
+
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
+gem 'bootstrap', '~> 5.0', '>= 5.0.1'
 
 
 # Use Active Storage variant

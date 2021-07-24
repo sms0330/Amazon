@@ -26,7 +26,8 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
-    alias_action :create, :read, :edit, :update, :destroy, to: :crud
+    alias_action(:create, :read, :edit, :update, :destroy, to: :crud)
+    
     can [:crud], Product do |product|
         user == product.user
     end
