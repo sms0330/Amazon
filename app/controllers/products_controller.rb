@@ -10,7 +10,11 @@ class ProductsController < ApplicationController
             @tag = Tag.find_or_initialize_by(name: params[:tag])
             @products = @tag.products.all.order('updated_at DESC')
         else
-            @products = Product.all.order(created_at: :desc) 
+            @products = Product.all.order(created_at: :desc)
+            respond_to do |format|
+                format.html { render }
+                format.json { render json: @products }
+            end 
         end 
     end
     
