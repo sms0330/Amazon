@@ -27,6 +27,19 @@ module Amazon
     #Configurations for ActiveJob to use DelayedJob 👇
     config.active_job.queue_adapter = :delayed_job
 
+    #Configurations for CORS to SPA 
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins('127.0.0.1:5500', 'localhost:5500', 'localhost:7777')
+        resource(
+          "/api/*",
+          headers: :any,
+          credentials: true,
+          methods: [:get, :post, :delete, :patch, :put, :options]
+        )
+      end
+    end
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
