@@ -25,19 +25,19 @@ class Api::V1::ProductsController <  Api::ApplicationController
         end
     end
 
+    def destroy
+        @product.destroy
+        render json: { status: 200 }, status: 200
+    end
+  
     def update
         if @product.update product_params
             render json: @product
         else
-            head :bad_request
-        end
-    end
-
-    def destroy
-        if @product.destroy
-            head :ok
-        else
-            head :bad_request
+            render(
+            json: { errors: @product.errors },
+            status: 422 
+            )
         end
     end
 
