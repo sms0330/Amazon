@@ -48,7 +48,9 @@ namespace :api, defaults:{format: :json } do
   namespace :v1 do
     resources :products
     resource :session, only: [:create, :destroy]
-    resources :users, only: [:create]
+    resources :users, only: [:create] do
+      get :current, on: :collection # => api/v1/users/current
+    end
   end
 end
 

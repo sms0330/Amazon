@@ -20,7 +20,7 @@ class Api::V1::ProductsController <  Api::ApplicationController
         else
             render(
                 json: { errors: product.errors.messages },
-                status: 422 #Unprocessable entity
+                status: 422 
             )
         end
     end
