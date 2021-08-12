@@ -4,7 +4,7 @@ class Api::V1::ProductsController <  Api::ApplicationController
 
     def index
         products = Product.order(created_at: :desc)
-        render(json: products, each_serializer: ProductCollectionSerializer)
+        render(json: products)
     end
 
     def show
