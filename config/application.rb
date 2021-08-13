@@ -30,7 +30,7 @@ module Amazon
     #Configurations for CORS to SPA 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins('127.0.0.1:5500', 'localhost:5500', 'localhost:7777')
+        origins('127.0.0.1:5500', 'localhost:5500', 'localhost:7777', 'localhost:8002')
         resource(
           "/api/*",
           headers: :any,
