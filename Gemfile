@@ -28,6 +28,7 @@ gem 'delayed_job_active_record'
 gem 'delayed_job_web'
 gem 'bootstrap', '~> 5.0', '>= 5.0.1'
 gem 'active_model_serializers'
+gem 'stripe-rails'
 
 
 # Use Active Storage variant

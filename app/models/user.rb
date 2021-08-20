@@ -14,6 +14,9 @@ class User < ApplicationRecord
     has_many :votes
     has_many :vote_reviews, through: :votes, source: :review
 
+    has_many :sent_pays, class_name: 'Pay', foreign_key: :sender_id, dependent: :nullify
+    has_many :received_pays, class_name: 'Pay', foreign_key: :receiver_id, dependent: :nullify
+
     has_secure_password
 
     validates :email, presence: true, uniqueness: { case_sensitive: false }

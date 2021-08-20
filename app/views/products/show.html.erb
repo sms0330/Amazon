@@ -9,8 +9,8 @@
 </p>
 <p>Created_by: <%= @product.user&.full_name || "Deleted" %></p>
 <p>Created at:<%= @product.created_at %></p>
-<% if can? :crud, @product %>
-  <%= link_to 'Edit', edit_product_path(@product) %> |
+<% if current_user %>
+    <%= link_to("Pay", new_product_pay_path(@product), class: "btn btn-warning") %>
 <% end %>
 <% if @favourite%>
   <%= link_to @favourite.is_favourite ? "Cancel Favourite" : "Cancel Unavourite", favourite_path(@favourite), class:"btn btn-light ", method: :delete%>
@@ -23,6 +23,9 @@
   <input type="hidden" name="is_favourite" value="false">
   <%= f.submit "Unfavourite", class:"btn btn-dark" %>
   <% end %>
+<% end %>
+<% if can? :crud, @product %>
+  <%= link_to 'Edit', edit_product_path(@product) %> |
 <% end %>
 <% if can? :crud, @product %>
   <%= link_to 'Delete', product_path(@product), method: :delete, data: { confirm: "Are you sure?" } %>

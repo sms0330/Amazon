@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
 
  resources :products do
+    resources :pays, only: [:new, :create]
+    get '/pays/complete', to: 'pays#complete'
   resources :reviews do
     resources :likes, shallow: true, only: [:create, :destroy]
     resources :votes, shallow: true, only: [:create, :destroy]

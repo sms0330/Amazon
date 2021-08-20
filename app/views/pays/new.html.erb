@@ -1,0 +1,16 @@
+<h1>Shopping Cart</h1>
+
+<% if @pay.errors.any? %>
+    <% @pay.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger" role="alert">
+        <%= message %>
+    </div>
+    <% end %>
+<% end %>
+<%= form_for @pay, url: product_pays_path do |f| %>
+    <div>
+        <%= f.label :amount %>
+        <%= f.number_field :amount %>
+    </div>
+    <%= f.submit 'Proceed to Checkout', class: 'btn btn-primary'%>
+<% end %> 

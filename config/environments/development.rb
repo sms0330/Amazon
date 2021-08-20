@@ -30,6 +30,11 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  #Stripe Configuration
+  #When we make a req to Stripe it will debug inside our console
+  config.stripe.debug_js = true
+  config.stripe.publishable_key = 'pk_test_51JPsMnC3SMTwTswI18mNzLVYEJXxf59D3odhJWAk9YLLbwsrlrwTZt3TZbtnlOaWFVmXpzn0rh8pERs9djk97Zaz00cMKnvLOO'
+
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 

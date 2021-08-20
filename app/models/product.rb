@@ -17,6 +17,8 @@ class Product < ApplicationRecord
 
     has_many :reviews, dependent: :destroy
 
+    has_many :pays, dependent: :destroy
+
     belongs_to :user, optional: true
 
     # A callback method to set the default price to 1

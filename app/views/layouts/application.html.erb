@@ -11,12 +11,7 @@
   </head>
 
   <body>
-    <% flash.each do |type, message|%>
-    <div class="flush flush-<%= type%>">
-      <%= message%>
-    </div>
-    <% end%>
-      <div class="container">
+      <div class="container" />
         <a href="/">Home</a> |
         <a href="/about">About</a> |
         <a href="/contact">Contact Us</a> |
@@ -31,7 +26,10 @@
           <%= link_to 'Sign Up', new_user_path %>
         <% end %>
         <hr>
-        <div class="col-md-6">
+        <div class="col-md-6" />
+      <div>
+        <%= render 'layouts/alerts' %>
+      </div>
     <%= yield %>
   </body>
 </html>
