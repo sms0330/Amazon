@@ -1,6 +1,9 @@
 class User < ApplicationRecord
-    has_many :questions, dependent: :nullify
-    has_many :answers, dependent: :nullify
+    geocoded_by :address
+    after_validation :geocode
+
+    has_many :products, dependent: :nullify
+    has_many :reviews, dependent: :nullify
     has_many :news_articles, dependent: :nullify
 
     # lab for many to many

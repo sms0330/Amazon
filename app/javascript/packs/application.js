@@ -2,15 +2,27 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
-import Rails from "@rails/ujs"
-import * as ActiveStorage from "@rails/activestorage"
-import "channels"
-Rails.start()
-ActiveStorage.start()
-import "bootstrap";
-import '../stylesheets/application'
-//import '../packs/question'
-import './selectize';
+
+require("@rails/ujs").start()
+require("@rails/activestorage").start()
+require("channels")
+
+require('bootstrap')
+require('underscore')
+require('./gmaps_google')
+require('./selectize')
+require('../stylesheets/application.scss')
+
+// import Rails from "@rails/ujs"
+// import * as ActiveStorage from "@rails/activestorage"
+// import "channels"
+// Rails.start()
+// ActiveStorage.start()
+// import "bootstrap";
+// import "underscore";
+// import Gmaps from "./gmaps_google";
+// import '../stylesheets/application'
+// import './selectize';
 window.jQuery = $;
 window.$ = $;
 // Uncomment to copy all static images under ../images to the output folder and reference

@@ -18,6 +18,7 @@ super_user=User.create(
     first_name: 'Joseph',
     last_name: 'Son',
     email: 'sms0330@gmail.com',
+    address: '628 6th Avenue, New Westminster, BC, Canada',
     password: PASSWORD,
     is_admin: true
 )
@@ -29,6 +30,7 @@ super_user=User.create(
         first_name: first_name,
         last_name: last_name,
         email: "#{first_name}.#{last_name}@example.com",
+        address: Faker::Address.street_address,
         password: PASSWORD
     )
 end

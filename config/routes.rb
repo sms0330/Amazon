@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 #  post '/products/:product_id/reviews/:review_id/likes', {to: "likes#create", as: :product_review_likes}
 #  delete '/products/:product_id/reviews/:review_id/likes/:id', {to: "likes#destroy", as: :product_review_like}
  
- resources :users, only:[:new, :create]
+ resources :users, only:[:new, :create, :show]
  resource :session, only:[:new, :create, :destroy]
 
  get("/dashboard",{to:"users#dashboard"})

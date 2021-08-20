@@ -29,6 +29,9 @@ gem 'delayed_job_web'
 gem 'bootstrap', '~> 5.0', '>= 5.0.1'
 gem 'active_model_serializers'
 gem 'stripe-rails'
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'underscore-rails'
 
 
 # Use Active Storage variant
