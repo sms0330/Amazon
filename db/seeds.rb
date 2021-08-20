@@ -30,7 +30,7 @@ super_user=User.create(
         first_name: first_name,
         last_name: last_name,
         email: "#{first_name}.#{last_name}@example.com",
-        address: Faker::Address.street_address,
+        address: '700 Royal Avenue, New Westminster, BC, Canada',
         password: PASSWORD
     )
 end
