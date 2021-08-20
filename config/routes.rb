@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'callbacks/index'
+  get "/auth/github", as: :sign_in_with_github
+  get "auth/:provider/callback", to: "callbacks#index"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get("/", {to:"welcome#index", as: "root"}) 
   get("/about", {to:"about#index"})

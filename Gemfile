@@ -32,6 +32,7 @@ gem 'stripe-rails'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'underscore-rails'
+gem 'omniauth-github', '~> 1.4'
 
 
 # Use Active Storage variant
