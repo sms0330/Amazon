@@ -5,7 +5,7 @@ class LikesController < ApplicationController
       like = Like.new(user: current_user, review: review)
       @product = Product.find(params[:product_id])
       if !can?(:like, review)
-        redirect_to review, alert: "can't like your own review"
+        redirect_to product_path(@product), alert: "can't like your own review"
       elsif like.save
         flash[:success] = "Review Liked"
         redirect_to product_path(@product)

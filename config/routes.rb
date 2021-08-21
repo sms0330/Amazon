@@ -23,13 +23,13 @@ Rails.application.routes.draw do
 
 
  resources :products do
-    resources :pays, only: [:new, :create]
-    get '/pays/complete', to: 'pays#complete'
   resources :reviews do
     resources :likes, shallow: true, only: [:create, :destroy]
     resources :votes, shallow: true, only: [:create, :destroy]
   end
   resources :favourites, shallow: true, only: [:create, :destroy]
+  resources :pays, only: [:new, :create]
+  get '/pays/complete', to: 'pays#complete'
  end
 
 #  post '/products/:product_id/reviews/:review_id/likes', {to: "likes#create", as: :product_review_likes}
